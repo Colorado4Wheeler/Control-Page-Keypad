@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- EPS (ColoradoFourWheeler) Plugin -->
+<Actions>
+	<!-- Defaults to the main ColoradoFourWheeler forum on Indigo -->
+	<SupportURL>http://forums.indigodomo.com/viewtopic.php?f=196&amp;t=16325</SupportURL>
+	
+	<!-- All plugins that monitor other devices will have an update action -->
+	<Action id="update" deviceFilter="self">
+		<Name>Update</Name>
+		<CallbackMethod>updateDevice</CallbackMethod>
+	</Action>
+	
+	<Action id="deleteChar" deviceFilter="self">
+		<Name>Delete last character</Name>
+		<CallbackMethod>delCharacter</CallbackMethod>
+	</Action>
+	
+	<Action id="sendChar" deviceFilter="self">
+		<Name>Send character</Name>
+		<CallbackMethod>sendCharacter</CallbackMethod>
+		<ConfigUI>
+			<SupportURL>http://forums.indigodomo.com/viewtopic.php?f=196&amp;t=16325</SupportURL>
+			
+			<Field id="key" type="textfield" defaultValue="">
+				<Label>Code character to send to the device:</Label>
+			</Field>
+			
+		</ConfigUI>
+	</Action>
+	
+	<Action id="sendDevices" deviceFilter="self.dimmerKeypad">
+		<Name>Send devices to dimmer keypad</Name>
+		<CallbackMethod>sendCharacter</CallbackMethod>
+		<ConfigUI>
+			<SupportURL>http://forums.indigodomo.com/viewtopic.php?f=196&amp;t=16325</SupportURL>
+			
+			<Field id="devicelist" type="list" rows="12">
+				<Label>Devices:</Label>
+				<List class="indigo.devices" filter="indigo.dimmer" />
+			</Field>
+			
+		</ConfigUI>
+	</Action>
+	
+	<!-- 1.1 -->
+	<Action id="nextCode" deviceFilter="self">
+		<Name>Complete field and move to next field</Name>
+		<CallbackMethod>nextField</CallbackMethod>	
+	</Action>	
+	
+	<Action id="completeCode" deviceFilter="self">
+		<Name>Process the current code</Name>
+		<CallbackMethod>sendComplete</CallbackMethod>
+	</Action>
+	
+	<!-- 1.1 -->
+	<Action id="cancelCode" deviceFilter="self">
+		<Name>Cancel code entry and reset</Name>
+		<CallbackMethod>sendComplete</CallbackMethod>	
+	</Action>
+</Actions>

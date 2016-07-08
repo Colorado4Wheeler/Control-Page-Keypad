@@ -1,0 +1,680 @@
+<?xml version="1.0"?>
+<!-- EPS (ColoradoFourWheeler) Plugin -->
+<Devices>
+	<Device type="custom" id="securityKeypad">
+		<Name>Security Keypad</Name>
+		<ConfigUI>
+			<Field id="securityCode" type="textfield" defaultValue="1234">
+				<Label>Security code:</Label>
+			</Field>
+			
+			<Field id="autoAcceptChars" type="textfield" defaultValue="4">
+				<Label>Auto accept character count:</Label>
+			</Field>
+			
+			<Field id="failAttempts" type="textfield" defaultValue="4">
+				<Label>Attempts until fail:</Label>
+			</Field>
+			
+			<Field id="failLockout" type="textfield" defaultValue="30">
+				<Label>If failed, seconds to lock out:</Label>
+			</Field>
+			
+			<Field id="resetTime" type="textfield" defaultValue="10">
+				<Label>Seconds until device resets:</Label>
+			</Field>
+			
+			<Field id="codeCharacter" type="textfield" defaultValue="*">
+				<Label>Optional UI character to show:</Label>
+			</Field>
+			
+			<Field id="sep_basics" type="separator" />
+			
+			<Field id="successUI" type="textfield" defaultValue="Disarmed">
+				<Label>Success UI:</Label>
+			</Field>
+			
+			<Field type="menu" id="successType" defaultValue="action">
+				<Label>Success action type:</Label>
+				<List>
+					<Option value="action">Run action group</Option>
+					<Option value="device">Control device</Option>
+					<Option value="variable">Change variable</Option>
+				</List>
+			</Field>
+			
+			<Field id="successAction" type="menu" visibleBindingId="successType" visibleBindingValue="action">
+				<Label>Action:</Label>
+				<List class="indigo.actionGroups" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="successDevice" type="menu" visibleBindingId="successType" visibleBindingValue="device">
+				<Label>Device:</Label>
+				<List class="indigo.devices" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="successDeviceAction" defaultValue="off" visibleBindingId="successType" visibleBindingValue="device">
+				<Label>Device action:</Label>
+				<List>
+					<Option value="on">Turn on</Option>
+					<Option value="off">Turn off</Option>
+					<Option value="toggle">Toggle on/off</Option>
+				</List>
+			</Field>
+			
+			<Field id="successVariable" type="menu" visibleBindingId="successType" visibleBindingValue="variable">
+				<Label>Variable:</Label>
+				<List class="indigo.variables" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="successVariableValue" type="textfield" defaultValue="" visibleBindingId="successType" visibleBindingValue="variable">
+				<Label>Change to:</Label>
+			</Field>
+			
+			<Field id="successSchedule" type="menu" visibleBindingId="successType" visibleBindingValue="schedule">
+				<Label>Schedule:</Label>
+				<List class="indigo.schedules" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="successScheduleAction" defaultValue="enable" visibleBindingId="successType" visibleBindingValue="schedule">
+				<Label>Schedule action:</Label>
+				<List>
+					<Option value="enable">Enable</Option>
+					<Option value="disable">Disable</Option>
+				</List>
+			</Field>
+			
+			<Field id="sep_success" type="separator" />
+			
+			<Field id="incorrectUI" type="textfield" defaultValue="Invalid">
+				<Label>Incorrect UI:</Label>
+			</Field>
+			
+			<Field type="menu" id="incorrectType" defaultValue="action">
+				<Label>Incorrect code action type:</Label>
+				<List>
+					<Option value="action">Run action group</Option>
+					<Option value="device">Control device</Option>
+					<Option value="variable">Change variable</Option>
+				</List>
+			</Field>
+			
+			<Field id="incorrectAction" type="menu" visibleBindingId="incorrectType" visibleBindingValue="action">
+				<Label>Action:</Label>
+				<List class="indigo.actionGroups" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="incorrectDevice" type="menu" visibleBindingId="incorrectType" visibleBindingValue="device">
+				<Label>Device:</Label>
+				<List class="indigo.devices" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="incorrectDeviceAction" defaultValue="off" visibleBindingId="incorrectType" visibleBindingValue="device">
+				<Label>Device action:</Label>
+				<List>
+					<Option value="on">Turn on</Option>
+					<Option value="off">Turn off</Option>
+					<Option value="toggle">Toggle on/off</Option>
+				</List>
+			</Field>
+			
+			<Field id="incorrectVariable" type="menu" visibleBindingId="incorrectType" visibleBindingValue="variable">
+				<Label>Variable:</Label>
+				<List class="indigo.variables" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="incorrectVariableValue" type="textfield" defaultValue="" visibleBindingId="incorrectType" visibleBindingValue="variable">
+				<Label>Change to:</Label>
+			</Field>
+			
+			<Field id="incorrectSchedule" type="menu" visibleBindingId="incorrectType" visibleBindingValue="schedule">
+				<Label>Schedule:</Label>
+				<List class="indigo.schedules" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="incorrectScheduleAction" defaultValue="enable" visibleBindingId="incorrectType" visibleBindingValue="schedule">
+				<Label>Schedule action:</Label>
+				<List>
+					<Option value="enable">Enable</Option>
+					<Option value="disable">Disable</Option>
+				</List>
+			</Field>
+			
+			<Field id="sep_incorrect" type="separator" />
+			
+			<Field id="failUI" type="textfield" defaultValue="FAIL">
+				<Label>Fail UI:</Label>
+			</Field>
+			
+			<Field type="menu" id="failType" defaultValue="action">
+				<Label>Fail action type:</Label>
+				<List>
+					<Option value="action">Run action group</Option>
+					<Option value="device">Control device</Option>
+					<Option value="variable">Change variable</Option>
+				</List>
+			</Field>
+			
+			<Field id="failAction" type="menu" visibleBindingId="failType" visibleBindingValue="action">
+				<Label>Action:</Label>
+				<List class="indigo.actionGroups" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="failDevice" type="menu" visibleBindingId="failType" visibleBindingValue="device">
+				<Label>Device:</Label>
+				<List class="indigo.devices" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="failDeviceAction" defaultValue="off" visibleBindingId="failType" visibleBindingValue="device">
+				<Label>Device action:</Label>
+				<List>
+					<Option value="on">Turn on</Option>
+					<Option value="off">Turn off</Option>
+					<Option value="toggle">Toggle on/off</Option>
+				</List>
+			</Field>
+			
+			<Field id="failVariable" type="menu" visibleBindingId="failType" visibleBindingValue="variable">
+				<Label>Variable:</Label>
+				<List class="indigo.variables" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="failVariableValue" type="textfield" defaultValue="" visibleBindingId="failType" visibleBindingValue="variable">
+				<Label>Change to:</Label>
+			</Field>
+			
+			<Field id="failSchedule" type="menu" visibleBindingId="failType" visibleBindingValue="schedule">
+				<Label>Schedule:</Label>
+				<List class="indigo.schedules" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="failScheduleAction" defaultValue="enable" visibleBindingId="failType" visibleBindingValue="schedule">
+				<Label>Schedule action:</Label>
+				<List>
+					<Option value="enable">Enable</Option>
+					<Option value="disable">Disable</Option>
+				</List>
+			</Field>
+			
+			<Field id="sep_fail" type="separator" />
+			
+			<Field id="actionCode1" type="textfield" defaultValue="911">
+				<Label>Action code 1:</Label>
+			</Field>
+			
+			<Field id="action1UI" type="textfield" defaultValue="POLICE">
+				<Label>Action 1 UI:</Label>
+			</Field>
+			
+			<Field type="menu" id="action1Type" defaultValue="action">
+				<Label>Action 1 action type:</Label>
+				<List>
+					<Option value="action">Run action group</Option>
+					<Option value="device">Control device</Option>
+					<Option value="variable">Change variable</Option>
+				</List>
+			</Field>
+			
+			<Field id="action1Action" type="menu" visibleBindingId="action1Type" visibleBindingValue="action">
+				<Label>Action:</Label>
+				<List class="indigo.actionGroups" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="action1Device" type="menu" visibleBindingId="action1Type" visibleBindingValue="device">
+				<Label>Device:</Label>
+				<List class="indigo.devices" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="action1DeviceAction" defaultValue="off" visibleBindingId="action1Type" visibleBindingValue="device">
+				<Label>Device action:</Label>
+				<List>
+					<Option value="on">Turn on</Option>
+					<Option value="off">Turn off</Option>
+					<Option value="toggle">Toggle on/off</Option>
+				</List>
+			</Field>
+			
+			<Field id="action1Variable" type="menu" visibleBindingId="action1Type" visibleBindingValue="variable">
+				<Label>Variable:</Label>
+				<List class="indigo.variables" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="action1VariableValue" type="textfield" defaultValue="" visibleBindingId="action1Type" visibleBindingValue="variable">
+				<Label>Change to:</Label>
+			</Field>
+			
+			<Field id="action1Schedule" type="menu" visibleBindingId="action1Type" visibleBindingValue="schedule">
+				<Label>Schedule:</Label>
+				<List class="indigo.schedules" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="action1ScheduleAction" defaultValue="enable" visibleBindingId="action1Type" visibleBindingValue="schedule">
+				<Label>Schedule action:</Label>
+				<List>
+					<Option value="enable">Enable</Option>
+					<Option value="disable">Disable</Option>
+				</List>
+			</Field>
+			
+			<Field id="sep_action1" type="separator" />
+			
+			
+			<Field id="actionCode2" type="textfield" defaultValue="999">
+				<Label>Action code 2:</Label>
+			</Field>
+			
+			<Field id="action2UI" type="textfield" defaultValue="ALL ON">
+				<Label>Action 2 UI:</Label>
+			</Field>
+			
+			<Field type="menu" id="action2Type" defaultValue="action">
+				<Label>Action 2 action type:</Label>
+				<List>
+					<Option value="action">Run action group</Option>
+					<Option value="device">Control device</Option>
+					<Option value="variable">Change variable</Option>
+				</List>
+			</Field>
+			
+			<Field id="action2Action" type="menu" visibleBindingId="action2Type" visibleBindingValue="action">
+				<Label>Action:</Label>
+				<List class="indigo.actionGroups" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="action2Device" type="menu" visibleBindingId="action2Type" visibleBindingValue="device">
+				<Label>Device:</Label>
+				<List class="indigo.devices" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="action2DeviceAction" defaultValue="off" visibleBindingId="action2Type" visibleBindingValue="device">
+				<Label>Device action:</Label>
+				<List>
+					<Option value="on">Turn on</Option>
+					<Option value="off">Turn off</Option>
+					<Option value="toggle">Toggle on/off</Option>
+				</List>
+			</Field>
+			
+			<Field id="action2Variable" type="menu" visibleBindingId="action2Type" visibleBindingValue="variable">
+				<Label>Variable:</Label>
+				<List class="indigo.variables" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field id="action2VariableValue" type="textfield" defaultValue="" visibleBindingId="action2Type" visibleBindingValue="variable">
+				<Label>Change to:</Label>
+			</Field>
+			
+			<Field id="action2Schedule" type="menu" visibleBindingId="action2Type" visibleBindingValue="schedule">
+				<Label>Schedule:</Label>
+				<List class="indigo.schedules" />
+				<CallbackMethod>onDeviceSelectionChange</CallbackMethod>
+			</Field>
+			
+			<Field type="menu" id="action2ScheduleAction" defaultValue="enable" visibleBindingId="action2Type" visibleBindingValue="schedule">
+				<Label>Schedule action:</Label>
+				<List>
+					<Option value="enable">Enable</Option>
+					<Option value="disable">Disable</Option>
+				</List>
+			</Field>
+			
+		</ConfigUI>
+		<States>
+			<!-- All EPS plugins have this state and use it for the Indigo lists -->
+			<State id="statedisplay">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Current device state</TriggerLabel>
+				<ControlPageLabel>Current device state</ControlPageLabel>
+			</State>
+			
+			<State id="keyCache">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Current value of characters sent</TriggerLabel>
+				<ControlPageLabel>Current value of characters sent</ControlPageLabel>
+			</State>
+			
+			<State id="currentAttempts">
+				<ValueType>Number</ValueType>
+				<TriggerLabel>Number of code attempts made</TriggerLabel>
+				<ControlPageLabel>Number of code attempts made</ControlPageLabel>
+			</State>
+			
+			<State id="lockOutActive">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Lock out is currently active</TriggerLabel>
+				<ControlPageLabel>Lock out is currently active</ControlPageLabel>
+			</State>
+			
+			<State id="lockOut">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Date and time when fail lockout will expire</TriggerLabel>
+				<ControlPageLabel>Date and time when fail lockout will expire</ControlPageLabel>
+			</State>
+			
+			<State id="resetTime">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Date and time when code entry will reset</TriggerLabel>
+				<ControlPageLabel>Date and time when code entry will reset</ControlPageLabel>
+			</State>
+			
+		</States>
+		<UiDisplayStateId>statedisplay</UiDisplayStateId>
+	</Device>
+	
+	<Device type="custom" id="dimmerKeypad">
+		<Name>Dimmer Keypad</Name>
+		<ConfigUI>
+			<Field id="devicelist" type="list" rows="12">
+				<Label>Optional devices:</Label>
+				<List class="indigo.devices" filter="indigo.dimmer" />
+			</Field>
+			
+			<Field id="brightnessUI" type="textfield" defaultValue="Enter Brightness">
+				<Label>Optional brightness prompt:</Label>
+			</Field>
+			
+			<Field id="completedUI" type="textfield" defaultValue="DONE" hidden="true">
+				<Label>Action 2 UI:</Label>
+			</Field>
+			
+			<Field id="sep_general" type="separator" />
+			
+			<Field type="menu" id="deviceMethod" defaultValue="replace">
+				<Label>When devices sent with action:</Label>
+				<List>
+					<Option value="replace">Replace these devices</Option>
+					<Option value="append">Append these devices</Option>
+					<Option value="ignore">Ignore action devices</Option>
+				</List>
+			</Field>
+			
+		</ConfigUI>
+		
+		<States>
+			<!-- All EPS plugins have this state and use it for the Indigo lists -->
+			<State id="statedisplay">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Current device state</TriggerLabel>
+				<ControlPageLabel>Current device state</ControlPageLabel>
+			</State>
+			
+			<State id="sep_statedisplay">
+				<ValueType>Separator</ValueType>
+			</State>
+			
+			<State id="keyCache">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Current value of characters sent</TriggerLabel>
+				<ControlPageLabel>Current value of characters sent</ControlPageLabel>
+			</State>
+			
+			<State id="resetTime">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Date and time when code entry will reset</TriggerLabel>
+				<ControlPageLabel>Date and time when code entry will reset</ControlPageLabel>
+			</State>
+			
+			<State id="deviceList">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+		</States>
+		<UiDisplayStateId>statedisplay</UiDisplayStateId>
+	</Device>
+
+	<Device type="custom" id="sprinklerKeypad">
+		<Name>Sprinkler Schedule Keypad</Name>
+		<ConfigUI>
+			<Field id="device" type="menu">
+				<Label>Sprinkler device 1:</Label>
+				<List class="indigo.devices" filter="indigo.sprinkler" />
+			</Field>
+			
+			<Field id="device2" type="menu">
+				<Label>Sprinkler device 2:</Label>
+				<List class="indigo.devices" filter="indigo.sprinkler" />
+			</Field>
+			
+			<Field id="device3" type="menu">
+				<Label>Sprinkler device 3:</Label>
+				<List class="indigo.devices" filter="indigo.sprinkler" />
+			</Field>
+			
+			<Field id="sep_devices" type="separator" />
+			
+			<Field id="deviceUI" type="textfield" defaultValue="Sprinkler #">
+				<Label>Optional sprinkler device prompt:</Label>
+			</Field>
+			
+			<Field id="device1SelectedUI" type="textfield" defaultValue="Device 1">
+				<Label>Optional device 1 selected prompt:</Label>
+			</Field>
+			
+			<Field id="device2SelectedUI" type="textfield" defaultValue="Device 2">
+				<Label>Optional device 2 selected prompt:</Label>
+			</Field>
+			
+			<Field id="device3SelectedUI" type="textfield" defaultValue="Device 3">
+				<Label>Optional device 3 selected prompt:</Label>
+			</Field>
+			
+			<Field id="sep_deviceUI" type="separator" />
+			
+			<Field id="zone1SelectedUI" type="textfield" defaultValue="Zone 1">
+				<Label>Optional zone 1 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone2SelectedUI" type="textfield" defaultValue="Zone 2">
+				<Label>Optional zone 2 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone3SelectedUI" type="textfield" defaultValue="Zone 3">
+				<Label>Optional zone 3 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone4SelectedUI" type="textfield" defaultValue="Zone 4">
+				<Label>Optional zone 4 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone5SelectedUI" type="textfield" defaultValue="Zone 5">
+				<Label>Optional zone 5 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone6SelectedUI" type="textfield" defaultValue="Zone 6">
+				<Label>Optional zone 6 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone7SelectedUI" type="textfield" defaultValue="Zone 7">
+				<Label>Optional zone 7 selected prompt:</Label>
+			</Field>
+			
+			<Field id="zone8SelectedUI" type="textfield" defaultValue="Zone 8">
+				<Label>Optional zone 8 selected prompt:</Label>
+			</Field>
+			
+			<Field id="completedUI" type="textfield" defaultValue="DONE" hidden="true">
+				<Label>Completed UI:</Label>
+			</Field>
+			
+			<Field id="sep_general" type="separator" />
+			
+			<!-- Probably never needed, in limbo for now -->
+			<Field id="storedRunTimes" type="checkbox" defaultValue="false" hidden="true">
+				<Label> </Label>
+				<Description>Show stored run times</Description>
+			</Field>
+			
+			<Field type="menu" id="runningAction" defaultValue="replace">
+				<Label>If device is running:</Label>
+				<List>
+					<Option value="replace">Restart running schedule with new schedule</Option>
+					<Option value="add">Restart running schedule and add new schedule to times</Option>
+				</List>
+			</Field>
+			
+		</ConfigUI>
+		
+		<States>
+			<!-- All EPS plugins have this state and use it for the Indigo lists -->
+			<State id="statedisplay">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Current device state</TriggerLabel>
+				<ControlPageLabel>Current device state</ControlPageLabel>
+			</State>
+			
+			<State id="sep_statedisplay">
+				<ValueType>Separator</ValueType>
+			</State>
+			
+			<State id="keyCache">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Current value of characters sent</TriggerLabel>
+				<ControlPageLabel>Current value of characters sent</ControlPageLabel>
+			</State>
+			
+			<State id="resetTime">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Date and time when code entry will reset</TriggerLabel>
+				<ControlPageLabel>Date and time when code entry will reset</ControlPageLabel>
+			</State>
+			
+			<State id="sep_basic">
+				<ValueType>Separator</ValueType>
+			</State>
+			
+			<State id="onDevice1">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Device 1 set mode active</TriggerLabel>
+				<ControlPageLabel>Device 1 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onDevice2">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Device 2 set mode active</TriggerLabel>
+				<ControlPageLabel>Device 2 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onDevice3">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Device 3 set mode active</TriggerLabel>
+				<ControlPageLabel>Device 3 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="sep_devices">
+				<ValueType>Separator</ValueType>
+			</State>
+			
+			<State id="onZone1">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 1 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 1 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone2">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 2 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 2 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone3">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 3 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 3 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone4">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 4 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 4 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone5">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 5 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 5 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone6">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 6 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 6 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone7">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 7 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 7 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="onZone8">
+				<ValueType>Boolean</ValueType>
+				<TriggerLabel>Zone 8 set mode active</TriggerLabel>
+				<ControlPageLabel>Zone 8 set mode active</ControlPageLabel>
+			</State>
+			
+			<State id="sep_zones">
+				<ValueType>Separator</ValueType>
+			</State>
+			
+			<State id="device1Schedule">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+			<State id="device1ZoneOn">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+			<State id="device2Schedule">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+			<State id="device2ZoneOn">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+			<State id="device3Schedule">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+			<State id="device3ZoneOn">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Special plugin state unsuitable for triggers</TriggerLabel>
+				<ControlPageLabel>Special plugin state unsuitable for control pages</ControlPageLabel>
+			</State>
+			
+		</States>
+		<UiDisplayStateId>statedisplay</UiDisplayStateId>
+	</Device>
+
+</Devices>
