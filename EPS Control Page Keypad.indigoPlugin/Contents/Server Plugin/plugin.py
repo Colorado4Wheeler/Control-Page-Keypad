@@ -690,6 +690,33 @@ class Plugin(indigo.PluginBase):
 			eps.printException(e)
 			
 	#
+	# Return actions definition to conditions when called
+	#
+	def epsConditionsDef (self, devAction):
+		try:
+			ret = {}
+			
+			SENDCHAR = 	[
+				"sendChar|*|key=strValue|"
+			]
+			
+			if "epsActionId" in devAction.props:
+				if devAction.props["epsActionId"] == "actionDefs":
+					# Add keys to the dictionary for each set of actions assigned
+					# either to the plugin as a whole or on a device-by-device basis
+					# so ret["myDeviceId"] = LISTARRY would limit that action definition
+					# to only that device type, while ret["self"] = LISTARRY makes that
+					# action available to all devices for your plugin
+				
+					#ret["myDeviceId"] = SENDCHAR
+					ret["self"] = SENDCHAR
+			
+			return ret
+		
+		except Exception as e:
+			eps.printException(e)
+			
+	#
 	# Device action: Next field - 1.1
 	#
 	def nextField (self, devAction):
@@ -1243,7 +1270,7 @@ class Plugin(indigo.PluginBase):
 				if dev.ownerProps[prefix + "DeviceAction"] == "on": indigo.device.turnOn(int(dev.ownerProps[prefix + "Device"]))
 				if dev.ownerProps[prefix + "DeviceAction"] == "off": indigo.device.turnOff(int(dev.ownerProps[prefix + "Device"]))
 				if dev.ownerProps[prefix + "DeviceAction"] == "toggle": indigo.device.toggle(int(dev.ownerProps[prefix + "Device"]))
-			if dev.ownerProps[prefix + "Type"] == "variable" and dev.ownerProps[prefix + "Variable"] != "": indigo.variable.updateValue(int(dev.ownerProps[prefix + "Variable"]), value=dev.ownerProps[prefix + "successVariableValue"])
+			if dev.ownerProps[prefix + "Type"] == "variable" and dev.ownerProps[prefix + "Variable"] != "": indigo.variable.updateValue(int(dev.ownerProps[prefix + "Variable"]), value=dev.ownerProps[prefix + "VariableValue"])
 			if dev.ownerProps[prefix + "Type"] == "schedule" and dev.ownerProps[prefix + "ScheduleAction"] != "": 
 				if dev.ownerProps[prefix + "ScheduleAction"] == "enable": indigo.actionGroup.execute(int(dev.ownerProps[prefix + "Schedule"]))
 				if dev.ownerProps[prefix + "ScheduleAction"] == "disable": indigo.actionGroup.execute(int(dev.ownerProps[prefix + "Schedule"]))

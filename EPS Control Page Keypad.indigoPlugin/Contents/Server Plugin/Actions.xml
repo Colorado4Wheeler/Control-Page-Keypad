@@ -58,4 +58,9 @@
 		<Name>Cancel code entry and reset</Name>
 		<CallbackMethod>sendComplete</CallbackMethod>	
 	</Action>
+	
+	<Action id="epsConditionsCallBack" deviceFilter="self" hidden="true">
+		<Name>Conditions definitions for EPS Conditions Plugins</Name>
+		<CallbackMethod>epsConditionsDef</CallbackMethod>	
+	</Action>
 </Actions>
